@@ -3,7 +3,7 @@
 # Finished On 28/10/2021
 
 import asyncio
-import re
+import re, random
 
 from config import ASSISTANT_NAME, BOT_USERNAME, IMG_1, IMG_2, GROUP_SUPPORT, UPDATES_CHANNEL
 from driver.filters import command, other_filters
@@ -16,6 +16,13 @@ from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
 
+RAND_1 = ["https://telegra.ph/file/dff230db49b1340590b71.jpg",
+          "https://telegra.ph/file/a93dcde4e16833cae4166.jpg",
+          "https://telegra.ph/file/91fd24d28f504704e3898.jpg",
+          "https://telegra.ph/file/3abbc797e790ea592c09e.jpg",
+          "https://telegra.ph/file/736f1fa758604d7bd647e.jpg",
+          "https://telegra.ph/file/1daa11f5c22f9bac4d60a.jpg",
+         ]
 
 def ytsearch(query):
     try:
@@ -142,7 +149,7 @@ async def play(c: Client, m: Message):
                 pos = add_to_queue(chat_id, songname, dl, link, "Audio", 0)
                 await suhu.delete()
                 await m.reply_photo(
-                    photo=f"{IMG_1}",
+                    random.choice(RAND_1),
                     caption=f"💡 **Track added to queue »** `{pos}`\n\n🏷 **Name:** [{songname}]({link})\n💭 **Chat:** `{chat_id}`\n🎧 **Request by:** {m.from_user.mention()}",
                     reply_markup=keyboard,
                 )
